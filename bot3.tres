@@ -7,5 +7,5 @@
 script = ExtResource( 2 )
 name = "Enemy"
 texture = ExtResource( 1 )
-Hp = 44
-Att = 10
+Hp = 30
+Att = 5

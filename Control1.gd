@@ -9,6 +9,7 @@ var ptarget=0
 var mccurrenthp=0
 var currentenemyhp=0
 var isdefend=false
+var death=true;
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if State.dialog==true:
@@ -61,12 +62,28 @@ func _on_attack_button_pressed():
 	$"CanvasLayer/action panel".hide()
 	display_text("Mc swing his sword")
 	yield(self, "textboxfalse")
-	display_text("Choose your target")
-	yield(self, "textboxfalse")
-	target1()
+	currentenemyhp= max(0, currentenemyhp - State.atk)
+	set_hp($emenycotainers/ProgressBar, currentenemyhp, enemy.Hp)
+		#$"CanvasLayer/action panel".hide()
+	$enemydamage.play("enenydamaga")
+	yield($enemydamage,"animation_finished")
+	if(currentenemyhp==0):
+		$enemydamage.play("death")
+		yield($enemydamage, "animation_finished")
+		State.dialog=false
+		State.death=true
+		#State.index=State.index+1
+		_ready()
+		get_tree().change_scene("res://src/test2.tscn")
+		
+		
+	
+	else:
+		enemy_turn()
+	
 	
 
-func target1():
+
 	if(Input.is_action_just_pressed("ui")==true):
 		currentenemyhp= max(0, currentenemyhp - State.atk)
 		set_hp($emenycotainers/ProgressBar, currentenemyhp, enemy.Hp)

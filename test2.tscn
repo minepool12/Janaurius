@@ -1,12 +1,12 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://src/stuff.gd" type="Script" id=1]
-[ext_resource path="res://src/next-indicator (1).png" type="Texture" id=2]
-[ext_resource path="res://src/background.png" type="Texture" id=3]
-[ext_resource path="res://stuff/Overlock-Black.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://stuff/Overlock-Black.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://dialog.gd" type="Script" id=2]
+[ext_resource path="res://src/next-indicator (1).png" type="Texture" id=3]
+[ext_resource path="res://src/background.png" type="Texture" id=4]
 
 [sub_resource type="DynamicFont" id=1]
-font_data = ExtResource( 4 )
+font_data = ExtResource( 1 )
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -39,7 +39,7 @@ tracks/0/keys = {
 "values": [ Vector2( 894.375, 509.125 ), Vector2( 894.375, 526.125 ) ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=4]
 resource_name = "movement"
 loop = true
 tracks/0/type = "value"
@@ -55,18 +55,12 @@ tracks/0/keys = {
 "values": [ Vector2( 894.375, 509.125 ), Vector2( 894.375, 530.125 ), Vector2( 894.375, 509.125 ) ]
 }
 
-[sub_resource type="DynamicFont" id=4]
-font_data = ExtResource( 4 )
+[sub_resource type="DynamicFont" id=5]
+font_data = ExtResource( 1 )
 
 [node name="Control" type="Control"]
-anchor_left = 0.41
-anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -423.84
-margin_top = -594.0
-margin_right = -4.0
-margin_bottom = 6.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -74,19 +68,19 @@ __meta__ = {
 [node name="dialog" type="Control" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
-script = ExtResource( 1 )
+script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="dialog"]
+[node name="secondpart" type="TextureRect" parent="dialog"]
 anchor_right = 10.85
 anchor_bottom = 7.6
 margin_left = 93.0
 margin_top = 383.0
 margin_right = 497.0
 margin_bottom = 233.0
-texture = ExtResource( 3 )
+texture = ExtResource( 4 )
 expand = true
 stretch_mode = 1
 __meta__ = {
@@ -111,13 +105,13 @@ __meta__ = {
 [node name="Next-indicator(1)" type="Sprite" parent="dialog/Tween"]
 position = Vector2( 894.375, 509.125 )
 scale = Vector2( 0.495098, 0.436275 )
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="dialog/Tween/Next-indicator(1)"]
 autoplay = "indicator bar"
 anims/RESET = SubResource( 2 )
 "anims/indicator bar" = SubResource( 3 )
-anims/movement = SubResource( 5 )
+anims/movement = SubResource( 4 )
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="dialog"]
 anchor_right = 1.0
@@ -127,7 +121,7 @@ margin_top = 386.0
 margin_right = 319.0
 margin_bottom = 393.0
 custom_colors/default_color = Color( 0, 0, 0, 1 )
-custom_fonts/normal_font = SubResource( 4 )
+custom_fonts/normal_font = SubResource( 5 )
 bbcode_text = "dgd"
 text = "dgd"
 __meta__ = {

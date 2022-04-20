@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/stuff.gd" type="Script" id=1]
-[ext_resource path="res://stuff/next-indicator (1).png" type="Texture" id=2]
-[ext_resource path="res://stuff/background.png" type="Texture" id=3]
+[ext_resource path="res://src/next-indicator (1).png" type="Texture" id=2]
+[ext_resource path="res://src/background.png" type="Texture" id=3]
 [ext_resource path="res://stuff/Overlock-Black.ttf" type="DynamicFontData" id=4]
 
 [sub_resource type="DynamicFont" id=1]

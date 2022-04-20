@@ -1,8 +1,13 @@
 extends Node
-var currenthp=11
+var currenthp=50
 var maxhp=50
 var atk=10
 var dialog=false
+var death=false
+var index=-1
+var Dmg=5
+var maxhp1=35;
+var currentmaxhp1=35;
 
 
 # Declare member variables here. Examples:
