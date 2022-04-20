@@ -10,6 +10,12 @@ var mccurrenthp=0
 var currentenemyhp=0
 var isdefend=false
 var death=true;
+
+#Paralysis status for enemy
+var enemy_paralyzed = false
+#Random number generator for chance stuff
+var rng = RandomNumberGenerator.new()
+var random_number = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if State.dialog==true:
@@ -57,10 +63,51 @@ func display_text(text):
 #func _process(delta):
 #	pass
 
+# I can't find where the buttons are in the scenes, please add a button for this.
+# Also having trouble running the code locally, so you may have to just do testing for me.
+func _on_skill_button_pressed():
+	$"CanvasLayer/action panel".hide()
+	display_text("You channel the power of Jupiter, striking your enemy with a burst of electricity.")
+	yield(self, "textboxfalse")
+	currentenemyhp= max(0, currentenemyhp - State.atk * 1.5)
+	enemy_paralyzed = true
+	set_hp($emenycotainers/ProgressBar, currentenemyhp, enemy.Hp)
+		#$"CanvasLayer/action panel".hide()
+	$enemydamage.play("enenydamaga")
+	yield($enemydamage,"animation_finished")
+	if(currentenemyhp==0):
+		$enemydamage.play("death")
+		yield($enemydamage, "animation_finished")
+		State.dialog=false
+		State.death=true
+		#State.index=State.index+1
+		_ready()
+		get_tree().change_scene("res://src/test2.tscn")
+		
+		
+	
+	else:
+		enemy_turn()
+	
+	
+
+
+	if(Input.is_action_just_pressed("ui")==true):
+		currentenemyhp= max(0, currentenemyhp - State.atk)
+		set_hp($emenycotainers/ProgressBar, currentenemyhp, enemy.Hp)
+		#$"CanvasLayer/action panel".hide()
+		$enemydamage.play("enenydamaga")
+		yield($enemydamage,"animation_finished")
+	if(currentenemyhp==0):
+		$enemydamage.play("death")
+		yield($enemydamage, "animation_finished")
+	else:
+		enemy_turn()
+
 
 func _on_attack_button_pressed():
 	$"CanvasLayer/action panel".hide()
-	display_text("Mc swing his sword")
+	display_text("You swing your sword")
 	yield(self, "textboxfalse")
 	currentenemyhp= max(0, currentenemyhp - State.atk)
 	set_hp($emenycotainers/ProgressBar, currentenemyhp, enemy.Hp)
@@ -100,7 +147,23 @@ func _on_attack_button_pressed():
 	
 func enemy_turn():
 	$"CanvasLayer/action panel".hide()
-	display_text("%s swing a might strike" %enemy.name)
+	if(enemy_paralyzed):
+		rng.randomize()
+		random_number=rng.randi_range(1, 2)
+		if(random_number > 1):
+			enemy_attack()
+		else:
+			display_text("%s is paralyzed and can't attack!" %enemy.name)
+	else:
+		enemy_attack()
+	if(mccurrenthp==0):
+		display_text("Game Over")
+		yield(self, "textboxfalse")
+	else:
+			$"CanvasLayer/action panel".show()
+
+func enemy_attack():
+	display_text("%s takes a mighty swing at you." %enemy.name)
 	if(isdefend==true):
 		isdefend=false
 		mccurrenthp= max(0, mccurrenthp - (enemy.Att / 2))
@@ -112,24 +175,19 @@ func enemy_turn():
 		yield(self, "textboxfalse")
 	$enemydamage.play("shake")
 	yield($enemydamage,"animation_finished")
-	if(mccurrenthp==0):
-		display_text("Game Over")
-		yield(self, "textboxfalse")
-	else:
-			$"CanvasLayer/action panel".show()
 
 
 func _on_defend_button_pressed():
 	isdefend=true
 	$"CanvasLayer/action panel".hide()
-	display_text("You raise your Sheild")
+	display_text("You brace yourself, anticipating an attack.")
 	yield(self, "textboxfalse")
 	enemy_turn()
 
 
 func _on_heal_button_pressed():
 	$"CanvasLayer/action panel".hide()
-	display_text("Mc heal himself ")
+	display_text("You hastily bandage yourself up. ")
 	yield(self, "textboxfalse")
 	mccurrenthp= min(State.maxhp, mccurrenthp + 10)
 	set_hp($"player Panel/playerdata/ProgressBar", mccurrenthp, State.maxhp)

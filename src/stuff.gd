@@ -1,9 +1,10 @@
 extends Control
 var dia=["Child of Fate, Your time has come. Let us see your fate in the world", 
-"That dream agian. Well too late to think about it. I going to be late for bracer test","Hey, you are so late. you missed out about what going on the test. It is 1vs1 match. I see you after the test","I better getting going to the testing area", " ","i did it"]
+"That dream again. Well too late to think about it. I'm going to be late for the bracer test","Hey, you're so late man. You missed the instruction the test. We're each dueling a single opponent. Good luck, I'll see you after the test","I better getting going to the testing area", " ","I did it"]
 var dia_index=0
 var finished = false
 var namec=["????", "mc","cf", "mc"," ","mc"]
+
 
 # Declare member variables here. Examples:
 # var a = 2
