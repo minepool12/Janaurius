@@ -1,6 +1,5 @@
 [gd_scene load_steps=17 format=2]
 
-[ext_resource path="res://stuff/Overlock-Black.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://stuff/Control1.tscn" type="PackedScene" id=2]
 [ext_resource path="res://stuff/Control2.gd" type="Script" id=3]
 [ext_resource path="res://stuff/slime-removebg-preview.png" type="Texture" id=4]
