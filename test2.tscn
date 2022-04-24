@@ -131,3 +131,4 @@ __meta__ = {
 
 [node name="a" type="AudioStreamPlayer" parent="dialog"]
 stream = ExtResource( 5 )
+volume_db = -22.0
