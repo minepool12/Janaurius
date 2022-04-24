@@ -13,8 +13,8 @@ var namec=["Acastus"]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-
 	load_dialog()
+	$"a".play()
 
 func _process(delta):
 	$"Tween/Next-indicator(1)".visible = finished
@@ -43,6 +43,7 @@ func load_dialog():
 		$TextureRect.hide();
 		$TextureRect.hide();
 		State.dialog=true
+		$"a".stop()
 		Control1._ready()
 		
 
