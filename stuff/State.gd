@@ -1,3 +1,4 @@
+# This is the status page for the main character
 extends Node
 var currenthp=50
 var maxhp=50
