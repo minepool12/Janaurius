@@ -13,6 +13,7 @@ var death=true;
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if State.dialog==true:
+		$AudioStreamPlayer.play()
 		$"textbox".show()
 		$emenycotainers.show()
 		$"player Panel".show()
@@ -35,6 +36,7 @@ func _ready():
 		$"textbox".hide()
 		$emenycotainers.hide()
 		$"player Panel".hide()
+		$AudioStreamPlayer.stop()
 		
 		#$"action panel".hide()
 		$"CanvasLayer/action panel".hide()
@@ -73,6 +75,7 @@ func _on_attack_button_pressed():
 		State.dialog=false
 		State.death=true
 		#State.index=State.index+1
+		
 		_ready()
 		get_tree().change_scene("res://src/test2.tscn")
 		
@@ -115,6 +118,7 @@ func enemy_turn():
 	if(mccurrenthp==0):
 		display_text("Game Over")
 		yield(self, "textboxfalse")
+		get_tree().change_scene("res://src/Game_Over.tscn")
 	else:
 			$"CanvasLayer/action panel".show()
 
