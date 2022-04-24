@@ -262,6 +262,9 @@ anims/shake = SubResource( 6 )
 [node name="Camera2D" parent="battle" index="7"]
 current = false
 
+[node name="AudioStreamPlayer" parent="battle" index="8"]
+volume_db = -22.0
+
 [connection signal="pressed" from="battle/CanvasLayer/action panel/Actions/skill button" to="battle" method="_on_skill_button_pressed"]
 
 [editable path="battle"]
